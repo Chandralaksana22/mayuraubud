@@ -1,0 +1,82 @@
+title = "Accommodation"
+url = "/accommodation"
+layout = "default"
+is_hidden = 0
+==
+<?php
+	use Winter\Blog\Models\Post;
+    use Winter\Blog\Models\Category;
+
+    function onStart()
+    {
+      $this['posts'] = Post::where('published', 1)->get();
+      $this['accommodation'] = Category::where('slug', 'accommodation')->first();
+    }
+?>
+==
+
+<!-- accommodation home -->
+<section class="accommodation-home py-5">
+	<div class="container mt-5">
+		<h2 class="fw-bold text-center text-uppercase cinzel">Accommodation</h2>
+		<center><div class="underlines mb-4"></div></center>
+		<p class="text-center mb-4 mx-auto" style="max-width: 50%; font-size: 16px; color: #212529; font-weight: 300;">
+			Wadari Ubud Retreat presents a choice of two distinctive accommodation designs that are contemporary
+			in
+			style while retaining their roots deep in Bali’s creative heritage.
+		</p>
+		<div class="row mt-5 g-2">
+			{% for accommodation in accommodation.posts %}
+			<div class="item col-md-6 g-1 p-2">
+				<div class="card card-img-facilities">
+					<img src="{{ accommodation.featured_images[0].path }}" class="object-fit-cover card-img" alt="...">
+					<div class="card-img-overlay d-flex justify-content-end" style="flex-direction: column;">
+						<div class="row">
+							<div class="col-9">
+								<h4 class="cinzel text-white" style="font-size: 24px;">{{ accommodation.title }}</h4>
+								<p class="truncate-text-2-lines text-white" style="font-size: 16px;">
+									{{ accommodation.content_html|striptags }}
+								</p>
+							</div>
+							<div class="col-3">
+								<div class="position-absolute translate-right-x" style="bottom: 10%;">
+									<a href="{{url('/accommodation')}}/{{ accommodation.slug }}" class="btn btn-md cinzel p-2 btn-outline-white rounded-0 mx-2">
+										Explore
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			
+		</div>
+	</div>
+
+</section>
+<!-- end accommodation home -->
+
+
+<style>
+	.card-img-facilities {
+		--bs-card-border-width: 0px !important;
+		--bs-card-border-radius: 0px;
+		--bs-card-box-shadow: ;
+		--bs-card-inner-border-radius: 0px;
+	}
+
+	.truncate-text-2-lines {
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+	}
+</style>
+
+{% put scripts %}
+<script type="text/javascript">
+
+</script>
+{% endput %}

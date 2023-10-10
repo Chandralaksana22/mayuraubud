@@ -1,0 +1,96 @@
+<!-- Modal -->
+<div class="modal fade bannerpopup" id="BannerPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: transparent; border-radius: 0px!important; box-shadow:none; border:none">
+      <div class="modal-body p-0">
+        <div class="row g-0 popup-slider owl-carousel owl-theme">
+          
+          <div class="col-md-12 text-center item">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <a role="button" data-bs-toggle="modal" data-bs-target="#Modal-3" class="d-flex justify-content-center">
+              <img class="" src="https://thegarciaubud.com/storage/app/media/Garcia-NewPopUp-26-4-2023.jpg" style="width: 85%;">
+            </a>
+          </div>
+          
+          <div class="col-md-12 text-center item">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <a role="button" data-bs-toggle="modal" data-bs-target="#Modal-1" class="d-flex justify-content-center">
+              <img class="" src="https://thegarciaubud.com/storage/app/media/alma%20spa%20new.jpg" style="width: 85%;">
+            </a>
+          </div>
+          
+          <div class="col-md-12 text-center item">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <a role="button" data-bs-toggle="modal" data-bs-target="#Modal-2" class="d-flex justify-content-center">
+              <img class="" src="https://thegarciaubud.com/storage/app/media/hot-stone-garcia.jpg" style="width: 85%;">
+            </a>
+          </div>
+          
+        </div>
+      </div>    
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <div class="modal-body">
+        <p><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></p>
+        <p><a href="mailto:info@wadariubud.com?" target="_blank" class="btn btn-outline-green p-3 rounded-0 w-100">Send via Email</a></p>
+        <p><a href="#" target="_blank" class="btn btn-outline-green p-3 rounded-0 w-100">Send via Whatsapp</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <div class="modal-body">
+        <p><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></p>
+        <p><a href="mailto:info@wadariubud.com?" target="_blank" class="btn btn-outline-green p-3 rounded-0 w-100">Send via Email</a></p>
+        <p><a href="##" target="_blank" class="btn btn-outline-green p-3 rounded-0 w-100">Send via Whatsapp</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal-3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <div class="modal-body">
+        <p><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></p>
+        <p><a href="mailto:info@wadariubud.com?" target="_blank" class="btn btn-outline-green p-3 rounded-0 w-100">Send via Email</a></p>
+        <p><a href="#" target="_blank" class="btn btn-outline-green p-3 rounded-0 w-100">Send via Whatsapp</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bannerpopup .btn-close{
+    color: #000;
+    text-decoration: none;
+    opacity: 1;
+    position: absolute;
+    right: 9%;
+    top: 1%;
+    background-color: rgba(255,255,255, 0.75);
+    border-radius: 100%;
+    padding:5px;
+  }
+</style>
+
+{% put scripts %}
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $('#BannerPopUp').modal('show');
+  });
+
+</script>
+{% endput %}

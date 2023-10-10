@@ -1,0 +1,234 @@
+==
+<?php
+function onStart() {
+    // Check if the "mobile" word exists in User-Agent 
+    $isMob = is_numeric(strpos(strtolower($_SERVER["HTTP_USER_AGENT"]), "mobile"));
+
+    $datenow = date("Y-m-d");
+    $datenow2 = date_create(date("Y-m-d"));
+    $datemodif = date_modify($datenow2, '+2 day');
+    $newDate = $datemodif->format('Y-m-d');
+    date_default_timezone_set('Asia/Singapore');
+    $timeNow = date("H:i:s");
+    $dayNow = date("l");
+ 
+        $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+        $isMobile = is_numeric(strpos($ua, 'mobile'));
+        $this['Mobile'] = is_numeric(strpos($ua, 'mobile'));
+
+        $url = 'http://162.240.59.97/~wadariubud/';
+
+        if($isMobile == 1) {
+            header('Location: '.$url.'m');
+            exit;
+        }
+  }
+  
+?>
+==
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ this.page.title }} | Wadari Ubud</title>
+  <link rel="apple-touch-icon" sizes="57x57" href="{{ 'assets/images/apple-icon-57x57.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{{ 'assets/images/apple-icon-60x60.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ 'assets/images/apple-icon-72x72.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ 'assets/images/apple-icon-76x76.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ 'assets/images/apple-icon-114x114.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{ 'assets/images/apple-icon-120x120.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{ 'assets/images/apple-icon-144x144.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ 'assets/images/apple-icon-152x152.png'|theme}}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/images/apple-icon-180x180.png'|theme}}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ 'assets/images/android-icon-192x192.png'|theme}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/images/favicon-32x32.png'|theme}}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ 'assets/images/favicon-96x96.png'|theme}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{'assets/images/favicon-16x16.png'|theme}}">
+  <link rel="manifest" href="{{'assets/images/manifest.json'|theme}}">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <!-- google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Source+Sans+3:wght@200;300;400&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- datepicker -->
+  <link href="{{ 'assets/datepicker/css/t-datepicker.min.css'|theme }}" rel="stylesheet" type="text/css">
+  <link href="{{ 'assets/datepicker/css/themes/t-datepicker-bluegrey.css'|theme }}" rel="stylesheet" type="text/css">
+
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+    integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- custom css -->
+  <link rel="stylesheet" type="text/css" href="{{ 'assets/css/style.css'|theme }}">
+
+  <!-- gallery css -->
+  {% placeholder styles_gallery %}
+
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+  <!-- Event snippet for BOOKING conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+
+
+
+</head>
+
+<body>
+
+
+
+  <!-- Header -->
+  <header>
+    {% partial 'header' %}
+  </header>
+
+  <!-- book widget -->
+  {% partial 'book-widget' %}
+  <!-- end book widget -->
+
+  <!-- Content -->
+  {% page %}
+
+  <div class="position-relative">
+    <button onclick="topFunction()" class="btn btn-green btn-scroll-top rounded-0" id="myBtn" title="Go to top"
+      style="display:block; opacity: 0%;"><i class="fa fa-arrow-up"></i></button>
+    <a class="btn btn-wa btn-whatsapp rounded-circle py-2" style="display:block; opacity: 0%;"
+      href="https://wa.me/+628123860454" target="_blank"><i class="fab fa-whatsapp fs-1"></i></a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    {% partial 'footer' %}
+  </footer>
+
+
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+  <!-- jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- datepicker -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+    crossorigin="anonymous"></script>
+  <script src="{{ 'assets/datepicker/js/t-datepicker.js'|theme }}"></script>
+
+  <!-- owl carousel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- fontawesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/js/all.min.js"
+    integrity="sha512-Cvxz1E4gCrYKQfz6Ne+VoDiiLrbFBvc6BPh4iyKo2/ICdIodfgc5Q9cBjRivfQNUXBCEnQWcEInSXsvlNHY/ZQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- gallery js -->
+  {% placeholder scripts_gallery %}
+
+  <!-- custom js -->
+
+  {% placeholder scripts %}
+  <script type="text/javascript" src="{{ 'assets/js/script.js'|theme }}"></script>
+
+</body>
+
+</html>
+
+
+
+<div class="item row g-0 p-1">
+  <div class="col-md-12 mb-2">
+    <img src="{{ post.featured_images[0].path }}" alt="" style="height: 200px;" class="img-slider-accommodation">
+  </div>
+  <div class="col-md-12 row g-0 text-center">
+    <h5 class="mb-3 mt-3 text-uppercase fw-bold cinzel">{{ accommodation.title }}</h5>
+    <div class="col-md-3 mt-2 col-3 text-center" style="color: #ae7a2b;">
+      <i class="fa fa-cube fs-5"></i>
+      <p style="font-size:13px; color: #ae7a2b;">{{ accommodation.room.size }}</p>
+    </div>
+    <div class="col-md-5 mt-2 col-3 text-center" style="color: #ae7a2b;">
+      <i class="fa fa-bed fs-5"></i>
+      <p style="font-size:13px; color: #ae7a2b;">{{ accommodation.room.bed }}</p>
+    </div>
+    <div class="col-md-4 mt-2 col-3 text-center" style="color: #ae7a2b;">
+      <i class="fa fa-user fs-5"></i>
+      <p style="font-size:13px; color: #ae7a2b;">{{ accommodation.room.occupancy }}</p>
+    </div>
+  </div>
+  <div class="col-md-12 mb-2" style="text-align: justify;">
+    {{ accommodation.content_html|length > 180 ? accommodation.content_html|striptags|slice(0, 180)
+    ~ '...' : accommodation.content_html|raw|striptags }}
+  </div>
+  <div class="col-md-12 d-flex justify-content-center align-items-center">
+    <a class="btn btn-sm p-2 btn-violet rounded-0 mx-2" href="{{url('/accommodation')}}/{{ accommodation.slug }}">View
+      Detail</a>
+    <a href="{{accommodation.room.book_url}}" class="btn btn-sm p-2 btn-outline-green rounded-0 mx-2">Book Now</a>
+  </div>
+</div>
+
+<div class="items row g-0 p-1 text-center">
+  <div class="col-md-12 mb-2">
+    <img class="mdi-rooms-img" src="{{ post.featured_images[0].path }}">
+  </div>
+  <div class="mdi-rooms-content col-md-12 row g-0 text-center">
+    <div class="underline"></div>
+    <h3 style="font-size: 23px">{{ post.title }}</h3>
+    <div class="col-md-3 mt-2 col-3 text-center">
+      <i class="fa fa-cube fs-5"></i>
+      <p style="font-size:13px;">{{ post.room_spec[0].room_size }}</p>
+    </div>
+    <div class="col-md-5 mt-2 col-3 text-center">
+      <i class="fa fa-bed fs-5"></i>
+      <p style="font-size:13px;">{{ post.room_spec[0].occupancy }}</p>
+    </div>
+    <div class="col-md-4 mt-2 col-3 text-center">
+      <i class="fa fa-user fs-5"></i>
+      <p style="font-size:13px;">{{ post.room_spec[0].bed_type }}</p>
+    </div>
+  </div>
+  <p class="room-desc">{{ post.excerpt }}</p>
+  <div style="display: flex; justify-content: center; padding-top: 5%;">
+    <div class="relative" style="margin-right: 10px;">
+      <a class="mdi-rooms-btn" href="{{ url('villas/' ~ post.slug) }}">View Detail</a>
+    </div>
+    <div class="relative" style="margin-left: 10px;">
+      <a class="mdi-rooms-btn2" href="">Book Now</a>
+    </div>
+  </div>
+</div>

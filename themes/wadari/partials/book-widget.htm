@@ -1,0 +1,103 @@
+<section class="book-widget-section">
+	<div class="container py-4">
+		<div class="card w-100 mx-auto py-3 box-widget-book">
+			<div class="card-body">
+				<form method="get" class="widget-book-form" enctype="multipart/form-data">
+					<div class="row align-items-center">	
+						<div class="col-md-3 my-1 px-2 text-center">
+							<span>BOOK NOW! <br> BEST PRICE GUARANTEED</span>						
+						</div>
+						<div class="col-md-5 row g-0">
+							<div class="col-md-4 my-1 px-2">
+								<!-- <span class="fw-normal fs-5">Check In</span> -->
+								<div class="t-datepicker">
+									<div class="t-check-in w-100"></div>
+								</div>
+							</div>
+							<div class="col-md-4 my-1 px-2">
+								<!-- <span class="fw-normal fs-5">Check Out</span> -->
+								<div class="t-datepicker">
+									<div class="t-check-out w-100"></div>
+								</div>
+							</div>
+							<div class="col-md-4 my-1 px-2">
+								<select class="form-control text-secondary occupancy" name="occupancy" style="padding: 0.55rem 0.75rem; font-size: 14px;">
+									<option value="" disabled selected style="font-size:15px">Occupancy</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2 my-1 px-2">
+							<input type="text" class="form-control input-promo-code promocode" name="promocode" placeholder="Promo Code">
+						</div>
+						<div class="col-md-2 my-1 px-2 text-center">
+							<button type="button" onclick="widget_book()" class="btn btn-green rounded-0 text-uppercase py-3 px-3 " style="font-size: 0.75rem;">Check Availability</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style type="text/css">
+	
+	.input-promo-code{
+		border: none;
+		border-bottom: 1px solid grey;
+	}
+
+	.t-date-info-title{
+		color: grey!important;
+	}
+
+	.t-check-out{
+		border-left-width: 1px ;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.t-check-out .t-datepicker-day {
+			left: 0%;
+		}
+	}
+
+</style>
+
+{% put scripts %}
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+        // Call global the function
+        $('.t-datepicker').tDatePicker({
+          // options here
+      });
+    });
+
+    function widget_book(){
+        var checkin = document.getElementsByClassName("t-input-check-in")[0].value;
+        var checkout = document.getElementsByClassName("t-input-check-out")[0].value;
+        var occupancy = document.getElementsByClassName("occupancy")[0].value;
+        var promocode = document.getElementsByClassName("promocode")[0].value;
+        let datenow = new Date().toISOString().split('T')[0];
+        
+        const checkinTest = document.querySelector('.t-input-check-in');
+        console.log({checkinTest});
+        console.log(checkinTest ? 'true' : 'false');
+        if (checkin != "null"){
+            var url = "https://bookandlink.com/booking/booking-page.php?id=2336&checkin="+checkin+"&checkout="+checkout+"&promo="+promocode;
+        } else{
+            var url = "https://bookandlink.com/booking/booking-page.php?id=2336&checkin="+datenow+"";    
+        }
+        window.location.href = url;
+        
+    }
+
+</script>
+{% endput %}

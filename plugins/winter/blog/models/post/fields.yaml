@@ -1,0 +1,150 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+
+    title:
+        label: winter.blog::lang.post.title
+        span: left
+        placeholder: winter.blog::lang.post.title_placeholder
+
+    slug:
+        label: winter.blog::lang.post.slug
+        span: right
+        placeholder: winter.blog::lang.post.slug_placeholder
+        preset:
+            field: title
+            type: slug
+
+    toolbar:
+        type: partial
+        path: post_toolbar
+        cssClass: collapse-visible
+
+secondaryTabs:
+    stretch: true
+    fields:
+        content:
+            tab: winter.blog::lang.post.tab_edit
+            type: richeditor
+            span: full
+            stretch: true
+
+        categories:
+            tab: winter.blog::lang.post.tab_categories
+            type: relation
+            commentAbove: winter.blog::lang.post.categories_comment
+            placeholder: winter.blog::lang.post.categories_placeholder
+
+        published:
+            tab: winter.blog::lang.post.tab_manage
+            label: winter.blog::lang.post.published
+            span: left
+            type: checkbox
+
+        user:
+            tab: winter.blog::lang.post.tab_manage
+            label: winter.blog::lang.post.published_by
+            span: right
+            type: relation
+            nameFrom: login
+            emptyOption: winter.blog::lang.post.current_user
+
+        published_at:
+            tab: winter.blog::lang.post.tab_manage
+            label: winter.blog::lang.post.published_on
+            span: left
+            cssClass: checkbox-align
+            type: datepicker
+            mode: datetime
+            trigger:
+                action: enable
+                field: published
+                condition: checked
+
+        excerpt:
+            tab: winter.blog::lang.post.tab_manage
+            label: winter.blog::lang.post.excerpt
+            type: textarea
+            size: small
+
+        featured_images:
+            tab: winter.blog::lang.post.tab_manage
+            label: winter.blog::lang.post.featured_images
+            type: fileupload
+            mode: image
+            imageWidth: 200
+            imageHeight: 200
+
+        # room field
+        'room[book_url]':
+            tab: Room Spefication
+            label: Book URL
+            type: text
+            span: full
+        inquire_link:
+            tab: Room Spefication
+            label: URL Link Inquire
+            type: text
+            span: full
+        'room[size]':
+            tab: Room Spefication
+            label: Room Size
+            type: text
+            span: left
+
+        'room[bed]':
+            tab: Room Spefication
+            label: Bed Type
+            type: text
+            span: right
+
+        'room[occupancy]':
+            tab: Room Spefication
+            label: Occupancy
+            type: text
+            span: left
+
+        'room[bathroom]':
+            tab: Room Spefication
+            label: Bathroom
+            type: text
+            span: right
+            
+        'room[view]':
+            tab: Room Spefication
+            label: Room View
+            type: text
+            span: left
+
+        facilities:
+            tab: Room Spefication
+            label: Facilities
+            type: textarea
+            size: small
+        # end room field
+
+        # deals offers field
+        'offer[link_url]':
+            tab: Deals & Offers Field
+            label: URL Link
+            type: text
+            span: full
+        inquire:
+            tab: Deals & Offers Field
+            label: URL Link Inquire
+            type: text
+            span: full
+        inclusion:
+            tab: Deals & Offers Field
+            label: Benefits
+            type: textarea
+            size: small
+
+        termscondition:
+            tab: Deals & Offers Field
+            label: Terms and Condition
+            type: textarea
+            size: small
+        # end deals offers field

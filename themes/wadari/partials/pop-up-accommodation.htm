@@ -1,0 +1,73 @@
+{% for accommodation in accommodation.posts %}
+<div class="modal modal-lg fade" id="accommodationdetail-{{ accommodation.slug }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <div class="modal-header align-items-center justify-content-center">
+        <h1 class="modal-title text-center fs-5 fw-bold" id="exampleModalToggleLabel">{{ accommodation.title }}</h1>
+        <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body row g-0">
+
+        <div class="col-md-12 accommodation-img-slider owl-carousel owl-theme text-center mb-3">
+          {% for img in accommodation.featured_images %}
+          <div class="item row">
+            <div class="col-md-12 mb-2 px-5"> 
+              <center><img src="{{ img.path }}" alt="" class="accommodation-img"></center>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-3 col-3 text-center">
+          <i class="fa fa-cube fs-5"></i>
+          <p style="font-size:13px">{{ accommodation.room.size }}</p>
+        </div>
+        <div class="col-md-3 col-3 text-center">
+          <i class="fa fa-bed fs-5"></i>
+          <p style="font-size:13px">{{ accommodation.room.bed }}</p>
+        </div>
+        <div class="col-md-3 col-3 text-center">
+          <i class="fa fa-user fs-5"></i>
+          <p style="font-size:13px">{{ accommodation.room.occupancy }}</p>
+        </div>
+        <div class="col-md-3 col-3 text-center">
+          <i class="fa fa-bath fs-5"></i>
+          <p style="font-size:13px">{{ accommodation.room.bathroom }} Bathroom</p>
+        </div>
+        <div class="col-md-12">
+          {{ accommodation.content_html|raw }}
+        </div>
+        <div class="col-md-12">
+          <h5 class="text-center">Facilities</h5>
+          <ul class="list-accommodation px-4">
+            {% for facilities in accommodation.roomFacilities  %}
+            <li>{{ facilities }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+      <div class="modal-footer justify-content-center">
+        <!-- dekstop -->
+        <a href="{{bookurl}}" class="btn p-2 btn-outline-green rounded-0">Book Now</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<style type="text/css">
+
+  .list-accommodation{
+    column-count:3;
+  }
+  @media only screen and (max-width: 600px) {
+    .list-accommodation{
+      column-count:2;
+      font-size: 12px;
+    }
+    .list-accommodation li{
+      margin-right: 5px;
+    }
+  }
+
+</style>

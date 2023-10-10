@@ -1,0 +1,47 @@
+<div class="container-fluid check">
+	<div class="row">
+		<div class="col-12">
+			<a href="https://www.bookandlink.com/booking/wadari-retreat-villa-ubud_2336.html" class="check-item link-light" target="_blank">
+				<span>
+					<i class="fa fa-calendar me-2"></i>
+					Check Availability
+				</span>
+				<i class="fa fa-chevron-right"></i>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="container-fluid gx-0 menu">
+	<div class="row row-cols-5 gx-1" style="justify-content:space-around">
+		<div class="col-2 text-center">
+			<a href="{{ url('/m') }}" class="menu-item {{ (this.page.url == '/m') ? 'active' : '' }}">
+				<i class="fa fa-home"></i>
+				Home
+			</a>
+		</div>
+		<div class="col-3 text-center">
+			<a href="{{ url('/m/accommodation') }}" class="menu-item {{ ('accommodation' in this.page.url) ? 'active' : '' }}">
+				<i class="fa fa-bed"></i>
+				Accommodations
+			</a>
+		</div>
+		<div class="col-2 text-center">
+		    <a href="{{ url('/m/special-offers') }}" class="menu-item {{ ('special-offers' in this.page.url) ? 'active' : '' }}">
+		        <i class="fa fa-tags"></i>
+		        Offers
+		    </a>
+		</div>
+		<div class="col-2 text-center">
+			<a href="{{ url('/m/gallery') }}" class="menu-item {{ ('gallery' in this.page.url) ? 'active' : '' }}">
+				<i class="fa fa-image"></i>
+				Gallery
+			</a>
+		</div>
+		<div class="col-2 text-center">
+			<a href="{{ url('/m/contact') }}" class="menu-item {{ ('contact' in this.page.url) ? 'active' : '' }}">
+				<i class="fa fa-envelope"></i>
+				Contact
+			</a>
+		</div>
+	</div>
+</div>

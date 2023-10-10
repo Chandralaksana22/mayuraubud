@@ -1,0 +1,123 @@
+title = "Accomodation-mobile"
+url = "/m/accommodation"
+layout = "mobile"
+is_hidden = 0
+==
+<?php
+	use Winter\Blog\Models\Post;
+    use Winter\Blog\Models\Category;
+
+    function onStart()
+    {
+      $this['posts'] = Post::where('published', 1)->get();
+      $this['accommodation'] = Category::where('slug', 'accommodation')->first();
+    }
+?>
+==
+<style type="text/css">
+	span.room-specs {
+		font-size: 9px;
+	}
+	p.room-specs {
+		font-size: 9px;
+	}
+</style>
+
+
+<div class="header-page fixed-top">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<h1>Accommodations</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid accommodation py-2">
+	<div class="row">
+		<div class="col-12">
+			{% for accommodation in accommodation.posts|reverse %}
+			<div class="room">
+				<div class="pb-3">
+					<div class="slider mb-2">
+						{% for slider in accommodation.featured_images %}
+						<div class="ratio ratio-16x9">
+							<img src="{{ slider.path }}" class="img-fluid" alt="{{ accommodation.title }}">
+						</div>
+						{% endfor %}
+					</div>
+					<div class="row align-items-end mt-3">
+						<div class="col-12">
+							<h2 class="title">{{ accommodation.title }}</h2>
+							<p class="excerpt">{{ accommodation.excerpt }}</p>
+						</div>
+						<div class="col-12 py-2 button-wrapper text-end">
+							<button type="button" class="btn btn-outline-green w-100 py-2 collapsed" data-bs-toggle="collapse" data-bs-target="{{ '#' ~ accommodation.slug }}">Room Info <i class="fa fa-chevron-up mx-1 rotate-180"></i></button>
+						</div>
+					</div>
+					<div class="row collapse" id="{{ accommodation.slug }}">
+						<div class="col-12">
+							<hr>
+							<div class="row row-cols-3 gx-1">
+								<div class="col text-center">
+									<p class="room-icon mb-1">
+										<i class="fa fa-expand"></i>
+										Room Size
+									</p>
+									<p class="feature">{{ accommodation.room.size }}</p>
+								</div>
+								<div class="col text-center">
+									<p class="room-icon mb-1">
+										<i class="fa fa-bed room-icon"></i>
+										Bed
+									</p>
+									<p class="feature">{{ accommodation.room.bed }}</p>
+								</div>
+								<div class="col text-center">
+									<p class="room-icon mb-1">
+										<i class="fa fa-users room-icon"></i>
+										Occupancy
+									</p>
+									<p class="feature">{{ accommodation.room.occupancy }}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-12 facilities">
+									<div class="mb-3">
+										{% if accommodation.facilities != null %}
+											<h6 class="text-center">Room Amenities</h6>
+											<ul class="text-start lists amenities-list">
+												{% for facility in accommodation.amenities|split(',') %}
+												<li>{{ facility|trim }}</li>
+												{% endfor %}
+											</ul>
+										{% endif %}
+									</div>
+									<hr>
+									<div class="button-wrapper text-center">
+										<a href="{{accommodation.room.book_url}}" class="btn btn-custom w-100 py-2" target="_blank">Book this Room</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.btn:focus {
+		outline: none !important;
+	}
+
+	.btn-outline-dark:active:focus {
+		box-shadow: unset;
+	}
+	.btn-outline-dark:focus {
+		box-shadow: unset;
+	}
+</style>

@@ -1,0 +1,66 @@
+<!-- header home -->
+<section class="header-home">
+	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+		<div class="carousel-inner">
+		  <div class="carousel-item active" data-bs-interval="2000">
+			<img src="{{'assets/images/wadari-ubud-spa.jpg'|theme}}" style="height: 100vh; width: 100%; object-fit: cover;" alt="slider">
+		  </div>
+		  <div class="carousel-item" data-bs-interval="2000">
+			<img src="{{'assets/images/wadari-ubud-restaurant.jpg'|theme}}" style="height: 100vh; width: 100%; object-fit: cover;" alt="slider">
+		  </div>
+		  <div class="carousel-item" data-bs-interval="2000">
+			<img src="{{'assets/images/wadari-ubud-spa.jpg'|theme}}" style="height: 100vh; width: 100%; object-fit: cover;" alt="slider">
+		  </div>
+		</div>
+	  </div>
+	<div class="container-fluid g-0 d-flex bg-header">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+			<div class="container-fluid px-5">
+				<a class="navbar-brand" href="{{url('/')}}">
+					<img src="{{'assets/images/logohighres.png'|theme}}" alt="" style="height:60px">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-uppercase align-items-center">
+						<li class="nav-item">
+							<a style="font-size: 14px;" class="nav-link cinzel {{ this.page.title == 'Home' ? 'active' : '' }}" aria-current="page" href="{{url('/')}}">Home</a>
+						</li>
+						<li class="nav-item dropdown-menu-option dropup">
+							<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Accommodation
+							</a>
+							<ul class="dropdown-menu rounded-0">
+								<li><a class="dropdown-item" href="{{ url('/accommodation/deluxe-room') }}">DELUXE ROOM</a></li>
+								<li><a class="dropdown-item" href="{{ url('/accommodation/wadari-suites') }}">WADARI SUITES</a></li>
+								<li><a class="dropdown-item" href="{{ url('/accommodation/two-bedroom-family-suite') }}">TWO BEDROOM FAMILY SUITE</a></li>
+								
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a style="font-size: 14px;" class="nav-link cinzel {{ this.page.title == 'Facilities' ? 'active' : '' }}" href="{{url('/facilities')}}">Facilities</a>
+						</li>
+						<li class="nav-item">
+							<a style="font-size: 14px;" class="nav-link cinzel {{ this.page.title == 'Activities' ? 'active' : '' }}" href="{{url('/activities')}}">Activities</a>
+						</li>
+						<li class="nav-item">
+							<a style="font-size: 14px;" class="nav-link cinzel {{ this.page.title == 'Offers' ? 'active' : '' }}" href="{{url('/offers')}}">Offers</a>
+						</li>
+						<li class="nav-item">
+							<a style="font-size: 14px;" class="nav-link cinzel {{ this.page.title == 'Gallery' ? 'active' : '' }}" href="{{url('/gallery')}}">Gallery</a>
+						</li>
+						<li class="nav-item">
+							<a style="font-size: 14px;" class="nav-link cinzel {{ this.page.title == 'Contact Us' ? 'active' : '' }}" href="{{url('/contact')}}">Contact Us</a>
+						</li>
+						<li class="nav-item">
+							<a style="font-size: 14px;" class="nav-link cinzel" href="https://www.bookandlink.com/booking/wadari-retreat-villa-ubud_2336.html"><button class="btn btn-dark rounded-0" style="color: white!important;">Book Now</button></a>
+						</li>
+					</ul>
+					
+				</div>
+			</div>
+		</nav>
+	</div>
+</section>
+<!-- end header home -->

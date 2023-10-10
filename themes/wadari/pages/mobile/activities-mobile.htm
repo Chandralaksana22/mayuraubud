@@ -1,0 +1,66 @@
+title = "Activities"
+url = "/m/activities"
+layout = "mobile"
+is_hidden = 0
+==
+<?php
+	use Winter\Blog\Models\Post;
+    use Winter\Blog\Models\Category;
+
+    function onStart()
+    {
+      $this['posts'] = Post::where('published', 1)->get();
+      $this['activities'] = Category::where('slug', 'activities')->first();
+    }
+?>
+==
+<div class="header-page fixed-top">
+	<div class="container-fluid">
+		<div class="row gx-0">
+			<div class="col-1">
+				<a href="javascript:window.history.back();" class="link-light"><i class="bi bi-chevron-left"></i></a>
+			</div>
+			<div class="col-11 ps-1">
+				<h1>Resort Activities</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid activities py-2">
+	<div class="row">
+		<div class="col-12">
+			{% for activity in activities.posts|reverse %}
+			<div class="row gx-1 py-2 {{ not loop.first ? 'border-top' : '' }}">
+				<div class="col-5">
+					<div class="ratio ratio-1x1">
+						<img src="{{ activity.featured_images[0].path }}" class="img-fluid" alt="{{ activity.name }}"  style="border-radius: 10px;">
+					</div>
+				</div>
+				<div class="col-7 ps-2 d-flex flex-column justify-content-between">
+					<div class="title-wrapper">
+						<h2 class="mb-0">{{ activity.title }}</h2>
+						{% if activity.hour != "" %}
+						<p class="fw-bold mb-1">Operational Hours : {{ activity.hour }}</p>
+						{% endif %}
+						<div class="description mb-2">{{ activity.content_html|raw }}</div>
+					</div>
+					<div class="button-wrapper text-end">
+						{% if activity.room.book_url %}
+							<a href="{{activity.room.book_url}}" class="btn btn-outline-custom" >Book Now</a>
+                        {% endif %}
+                        {% if activity.inquire_link %}
+							<a href="{{activity.inquire_link}}" class="btn btn-outline-custom" >Enquire Now</a>
+                        {% endif %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.description p{
+		margin-bottom: 5px;
+	}
+</style>

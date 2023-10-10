@@ -1,0 +1,54 @@
+{% for offer in offers.posts %}
+<div class="modal modal-lg fade" id="offerdetail-{{ offer.slug }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <div class="modal-header align-items-center justify-content-center">
+        <h1 class="modal-title text-center fs-5 fw-bold" id="exampleModalToggleLabel">{{ offer.title }}</h1>
+        <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body row g-0">
+
+        <div class="col-md-12 text-center mb-3">
+          <img src="{{ offer.featured_images[0].path }}" alt="" class="img-fluid w-100">
+        </div>
+        <div class="col-md-12">
+            <p>{{ offer.excerpt }}</p>
+          {{ offer.content_html|raw }}
+        </div>
+        {% if offer.inclusion != null %}
+        <div class="col-md-12">
+          <h5>Inclusion :</h5>
+          <ul >
+            {% for inclusion in offer.listInclusion  %}
+            <li>{{ inclusion }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if offer.termscondition != null %}
+        <div class="col-md-12">
+          <h5>Terms & Condition :</h5>
+          <ul >
+            {% for termscondition in offer.listTermsCondition  %}
+            <li>{{ termscondition }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+      <div class="modal-footer justify-content-center">
+        <!-- dekstop -->
+        {% if offer.offer.link_url != null %}
+			<a href="{{offer.offer.link_url}}" class="btn p-2 btn-outline-green rounded-0">Book Now</a>
+		{% else %}
+		    <a href="{{bookurl}}" class="btn p-2 btn-outline-green rounded-0">Book Now</a>
+		{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<style type="text/css">
+
+</style>

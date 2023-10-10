@@ -1,0 +1,118 @@
+title = "Offers Detail"
+url = "/offers/:slug?"
+layout = "default"
+is_hidden = 0
+==
+<?php
+	use Winter\Blog\Models\Post;
+	use Winter\Blog\Models\Category;
+
+	function onStart()
+	{
+		$slug = $this->param('slug');
+		$this['offers_detail'] = Post::where('slug', $slug)->first();
+
+		$this['posts'] = Post::where('published', 1)->get();
+		$this['offers'] = Category::where('slug', 'deals-offers')->first();
+	}
+?>
+==
+
+<!-- start section -->
+<section class="news-detail-section my-5">
+	<div class="container">
+		<h2 class="fw-bold text-center text-uppercase cinzel">{{offers_detail.title}}</h2>
+		<center>
+			<div class="underlines mb-4"></div>
+		</center>
+		<p class="text-center mb-4 mx-auto" style="max-width: 50%; font-size: 16px; color: #212529; font-weight: 300;">
+			{{ offers_detail.content_html|raw }}
+		</p>
+	</div>
+</section>
+<!-- end section -->
+<!-- start section -->
+<section class="more-section1">
+	<div class="container-fluid p-0 bg-second">
+		<div class="row g-0 align-items-center">
+
+			<div class="col-md-6 row g-0 p-5 align-items-center order-1">
+				<div class="col-md-12 row g-0">
+					<p class="fw-bold" style="font-size: 18px; max-width: 95%;">
+						Benefits:
+					</p>
+					<ul class="ms-3 multi-column-list">
+						{% for inclusionoffers in offers.inclusion|split(',') %}
+						<li>{{ inclusionoffers|trim }}</li>
+						{% endfor %}
+					</ul>
+
+					<p class="fw-bold" style="font-size: 18px; max-width: 95%;">
+						Terms & Conditions:
+					</p>
+					<ul class="ms-3 multi-column-list">
+						{% for termsandcondition in offers.termscondition|split(',') %}
+						<li>{{ termsandcondition|trim }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-6 order-2 d-none d-sm-block">
+				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+							aria-label="Slide 2"></button>
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+							aria-label="Slide 3"></button>
+					</div>
+					<div class="carousel-inner">
+						{% for image in offers_detail.featured_images %}
+						<div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+							<img src="{{ image.path }}" class="d-block w-100" alt="{{ image.path }}"
+								style="height: 70vh; width: 100%; object-fit: cover;">
+						</div>
+						{% endfor %}
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mx-auto text-center mt-5 mb-5">
+		<a href="{{offers_detail.room.book_url}}" class="btn btn-md cinzel p-2 btn-green rounded-0 mx-2">
+			Book Now
+		</a>
+	</div>
+</section>
+<!-- end -->
+
+<style type="text/css">
+	.multi-column-list {
+		column-count: 2;
+		list-style: none;
+		padding-left: 0;
+	}
+
+	.multi-column-list li:before {
+		content: "\2022";
+		/* Bullet character */
+		padding-right: 8px;
+	}
+</style>
+
+{% put scripts %}
+<script type="text/javascript">
+
+</script>
+{% endput %}

@@ -1,0 +1,88 @@
+title = "Activities"
+url = "/m/facilities"
+layout = "mobile"
+is_hidden = 0
+==
+<?php
+	use Winter\Blog\Models\Post;
+    use Winter\Blog\Models\Category;
+
+    function onStart()
+    {
+      $this['posts'] = Post::where('published', 1)->get();
+      $this['facilities'] = Category::where('slug', 'facilities')->first();
+    }
+?>
+==
+<div class="header-page fixed-top">
+	<div class="container-fluid">
+		<div class="row gx-0">
+			<div class="col-1">
+				<a href="javascript:window.history.back();" class="link-light"><i class="bi bi-chevron-left"></i></a>
+			</div>
+			<div class="col-11 ps-1">
+				<h1>Facilities</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid restaurant py-2">
+	<div class="row">
+		<div class="col-12">
+			{% for facilities in facilities.posts|reverse %}
+			<div class="row gx-1 py-2 {{ not loop.first ? 'border-top' : '' }}">
+				<div class="col-5">
+					<div class="dining-img ratio ratio-1x1">
+						<img src="{{ facilities.featured_images[0].path }}" class="" alt="{{ facilities.title }}"
+							style="border-radius: 10px;">
+					</div>
+				</div>
+				<div class="col-7 ps-2 d-flex flex-column justify-content-between">
+					<div class="title-wrapper">
+						<h2 class="mb-0">{{ facilities.title }}</h2>
+						<p class="mb-0">{{ facilities.content_html|striptags|length > 150 ?
+							facilities.content_html|striptags|slice(0, 150) ~ '...' : facilities.excerpt|striptags }}
+						</p>
+						<!-- <a href="{{ '#' ~ facilities.slug }}" data-bs-toggle="modal" class="link-detail mb-5">Detail</a> -->
+					</div>
+					<div class="button-wrapper text-end">
+						{% if facilities.room.book_url %}
+
+						<a href="{{facilities.room.book_url}}" class="btn btn-md cinzel p-2 btn-custom rounded-0">Book
+							Now</a>
+
+						{% endif %}
+						{% if facilities.inquire_link %}
+
+						<a href="{{facilities.inquire_link}}" class="btn btn-md cinzel p-2 btn-custom rounded-0">Enquire
+							Now</a>
+
+						{% endif %}
+
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.dining-img {
+		height: 100%;
+	}
+
+	.link-detail {
+		text-decoration: none;
+		color: #037d82;
+		font-size: 10px;
+	}
+
+	/*.dining-img img {
+		height: 100%;
+		width: 100%;
+		border-radius: 10px;
+		object-fit: cover;
+		object-position: center;
+	}*/
+</style>

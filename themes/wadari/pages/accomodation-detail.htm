@@ -1,0 +1,123 @@
+title = "Accommodation Detail"
+url = "/accommodation/:slug?"
+layout = "default"
+is_hidden = 0
+==
+<?php
+	use Winter\Blog\Models\Post;
+	use Winter\Blog\Models\Category;
+
+	function onStart()
+	{
+		$slug = $this->param('slug');
+		$this['accommodation_detail'] = Post::where('slug', $slug)->first();
+
+		$this['posts'] = Post::where('published', 1)->get();
+		$this['accomodarion'] = Category::where('slug', 'accomodation')->first();
+	}
+?>
+==
+
+<!-- start section -->
+<section class="news-detail-section my-5">
+	<div class="container">
+		<h2 class="fw-bold text-center text-uppercase cinzel">{{accommodation_detail.title}}</h2>
+		<center><div class="underlines mb-4"></div></center>
+		<p class="text-center mb-4 mx-auto" style="max-width: 50%; font-size: 16px; color: #212529; font-weight: 300;">
+			{{ accommodation_detail.content_html|raw }}
+		</p>
+		<div class="mx-auto text-center">
+			<div class="row mt-5">
+				<div class="col-md-4">
+					<p style="color: #212529; font-weight: 400;">
+						Bed types
+					</p>
+					<p style="font-size: 18px; color: #212529; font-weight: 300;">
+						{{ accommodation_detail.room.bed }}
+					</p>
+				</div>
+				<div class="col-md-4">
+					<p style="color: #212529; font-weight: 400;">
+						Room Size
+					</p>
+					<p style="font-size: 18px; color: #212529; font-weight: 300;">
+						{{ accommodation_detail.room.size }}
+					</p>
+				</div>
+				<div class="col-md-4">
+					<p style="color: #212529; font-weight: 400;">
+						Occupancy
+					</p>
+					<p style="font-size: 18px; color: #212529; font-weight: 300;">
+						{{ accommodation_detail.room.occupancy }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end section -->
+<!-- start section -->
+<section class="more-section1">
+	<div class="container-fluid p-0 bg-second">
+		<div class="row g-0 align-items-center">
+
+			<div class="col-md-6 row g-0 p-5 align-items-center order-1">
+				<div class="col-md-12 row g-0">
+					<h4 class="text-uppercase fw-bold cinzel">Room Facilities</h4>
+					<div class="underlines mb-4"></div>
+					<img class="d-block d-sm-none mb-3" src="{{ accommodation_detail.featured_images[0].path }}" alt="{{ accommodation_detail.featured_images[0].path }}" style="max-height: 70vh; width: 100%; object-fit: cover;">
+					<ul class="ms-3 multi-column-list">
+						{% for facility in accommodation_detail.facilities|split(',') %}
+						<li>{{ facility|trim }}</li>
+						{% endfor %}
+					</ul>
+					<div class="mx-auto text-center mt-5 mb-5">
+						<a href="{{accommodation_detail.room.book_url}}" class="btn btn-md cinzel p-2 btn-green rounded-0 mx-2">
+							Book Now
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 order-2 d-none d-sm-block">
+				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+					<div class="carousel-inner">
+						{% for image in accommodation_detail.featured_images %}
+						<div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+							<img src="{{ image.path }}" class="d-block w-100" alt="{{ image.path }}" style="height: 70vh; width: 100%; object-fit: cover;">
+						</div>
+						{% endfor %}
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+					  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					  <span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+					  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					  <span class="visually-hidden">Next</span>
+					</button>
+				  </div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end -->
+
+<style type="text/css">
+ .multi-column-list {
+        column-count: 2;
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .multi-column-list li:before {
+        content: "\2022"; /* Bullet character */
+        padding-right: 8px;
+    }
+</style>
+
+{% put scripts %}
+<script type="text/javascript">
+
+</script>
+{% endput %}

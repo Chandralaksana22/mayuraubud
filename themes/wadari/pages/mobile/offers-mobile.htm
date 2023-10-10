@@ -1,0 +1,108 @@
+title = "Offers Mobile"
+url = "/m/special-offers"
+layout = "mobile"
+is_hidden = 0
+==
+<?php
+	use Winter\Blog\Models\Post;
+    use Winter\Blog\Models\Category;
+
+    function onStart()
+    {
+      $this['posts'] = Post::where('published', 1)->get();
+      $this['offers'] = Category::where('slug', 'deals-offers')->first();
+    }
+?>
+==
+<div class="header-page fixed-top">
+	<div class="container-fluid">
+		<div class="row gx-0">
+			<div class="col-1">
+				<a href="javascript:window.history.back();" class="link-light"><i class="bi bi-chevron-left"></i></a>
+			</div>
+			<div class="col-11 ps-1">
+				<h1>Special Offers</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid offers py-2">
+	<div class="row">
+		<div class="col-12">
+			{% for offer in offers.posts|reverse %}
+			<div class="card shadow-sm text-dark {{ not loop.last ? 'mb-2' : '' }}">
+				<a href="{{ '#' ~ offer.slug }}" data-bs-toggle="modal" class="link-dark">
+					<img src="{{ offer.featured_images[0].path }}" class="card-img-top" alt="{{ offer.title }}">
+					<div class="card-body p-2">
+						<h5 class="card-subtitle mb-0">Enquire Now</h5>
+						<h2 class="card-title mb-1">{{ offer.title }}</h2>
+						<p class="card-text">{{ offer.excerpt|raw }}</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="modal fade" id="{{ offer.slug }}" tabindex="-1" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">{{ offer.title }}</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								{{ offer.description|raw }}
+                                <div class="p-2">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ offer.title }}</h5>
+                                    <p class="fw-bold" style="color:black; font-size: 14px; max-width: 95%;">
+                                        Benefits:
+                                    </p>
+                                    <ul class="ms-3 multi-column-list">
+                                        {% for inclusionoffers in offer.inclusion|split(',') %}
+                                        <li style="margin-top:10px">{{ inclusionoffers|trim }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+							</div>
+							<div class="modal-footer button-wrapper">
+								<button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Close</button>
+								{% if offer.offer.link_url %}
+                                <a href="{{offer.offer.link_url}}"
+                                    class="btn btn-md cinzel p-2 btn btn-custom rounded-0">Book
+                                    Now</a>
+                                {% endif %}
+                                {% if offer.inquire %}
+                                <a href="{{offer.inquire}}"
+                                    class="btn btn-md cinzel p-2 btn btn-custom rounded-0">Enquire
+                                    Now</a>
+                                {% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<style>
+    .modal-body .btn-close {
+        position: fixed;
+        background-color: #fff;
+        filter: brightness(1) invert(1);
+        opacity: 1 !important;
+        top: 3%;
+        right: 5%;
+    }
+</style>
+<style type="text/css">
+    .multi-column-list {
+        column-count: 1;
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .multi-column-list li:before {
+        content: "\2022";
+        /* Bullet character */
+        padding-right: 8px;
+    }
+</style>
